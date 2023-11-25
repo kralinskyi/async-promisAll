@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kralinskyi/js-repeta-training/issues"
   },
-  "homepage": "https://github.com/kralinskyi/js-repeta-training#readme"
+  "homepage": "https://github.com/kralinskyi/js-repeta-training#readme",
+  "dependencies": {
+    "lowdash": "^1.2.0"
+  }
 }
