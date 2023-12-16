@@ -1,28 +1,30 @@
 {
-  "name": "js-repeta-training",
-  "version": "1.0.0",
+  "name": "parcel-project-template",
+  "version": "2.0.0",
   "description": "",
-  "main": "app.js",
-  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "homepage": "https://kralinskyi.github.io/async-promisAll",
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "start": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /async-promisAll/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kralinskyi/js-repeta-training.git"
+    "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
-  "author": "",
+  "keywords": [],
+  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kralinskyi/js-repeta-training/issues"
+    "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
-  "homepage": "https://github.com/kralinskyi/js-repeta-training#readme",
   "dependencies": {
-    "lowdash": "^1.2.0",
-    "shortid": "^2.2.16"
+    "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
-    "parcel": "^2.10.3"
-  }
+    "@parcel/transformer-sass": "^2.6.0",
+    "parcel": "^2.6.0",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "posthtml-include": "^1.7.4"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }
