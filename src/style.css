@@ -1,0 +1,19 @@
+.js-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.js-form-btns-container {
+  min-height: 300px;
+}
+
+.inputs {
+  padding: 5px;
+  margin: 5px;
+}
+
+.js-add-country,
+.js-form-submit-btn {
+  padding: 10px;
+  margin: 10px;
+}
