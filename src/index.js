@@ -6,13 +6,13 @@ const addCountryBtn = document.querySelector('.js-add-country');
 const countriesContainer = document.querySelector('.js-form-btns-container');
 const list = document.querySelector('.js-answers-from-form');
 const url = `https://restcountries.com/v3.1/name/`;
+const markup =
+  '<input type="text" placeholder="enter country" class="inputs" name="country"></input>';
 
 addCountryBtn.addEventListener('click', handleAddCountryBtn);
 form.addEventListener('submit', handleFormSubmit);
 
 function handleAddCountryBtn() {
-  const markup =
-    '<input type="text" placeholder="enter country" class="inputs"  name="country"></input>';
   countriesContainer.insertAdjacentHTML('beforeend', markup);
 }
 
@@ -30,15 +30,17 @@ function handleFormSubmit(e) {
     .then(async response => {
       const capitals = response.map(({ capital }) => capital[0]);
       const weatherService = await getWeather(capitals);
-      markup =
-        '<input type="text" placeholder="enter country" class="inputs" name="country"></input>';
+
       list.innerHTML = '';
-      countriesContainer.innerHTML = markup;
+
       list.insertAdjacentHTML('beforeend', createMarkUp(weatherService));
       console.log(weatherService);
     })
     .catch(e => console.log(e))
-    .finally(() => form.reset());
+    .finally(() => {
+      countriesContainer.innerHTML = markup;
+      form.reset();
+    });
 }
 
 async function getCountries(arr) {
