@@ -105,17 +105,15 @@ function createMarkUp(arr) {
         location: { name, country },
       }) => {
         return ` <li class="card">
-     <div>
-      <h2>${country}</h2>
-      <h3>${name}</h3>
-    </div>
-      <img src="${icon}" alt="${text}">
-      <p>${text}</p>
-      <p>${temp_c}</p>
-    </li>`;
+            <div class="card-info">
+              <h2 class="card-country">${country}</h2>
+              <h3 class="card-city">${name}</h3>
+            </div>
+            <img class="card-icon" src="${icon}" alt="${text}">
+            <p class="card-text">${text}</p>
+            <p class="card-temp">${temp_c}</p>
+          </li>`;
       }
     )
     .join('');
 }
-
-function createFlagImg(arr) {}

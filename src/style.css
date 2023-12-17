@@ -1,19 +1,142 @@
+/* Стилізація форми */
 .js-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
+/* Стилізація контейнера введення */
 .js-inputs-container {
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
+/* Стилізація введення */
 .inputs {
-  padding: 5px;
-  margin: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Стилізація кнопок */
+.add-country {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .js-add-country,
 .js-form-submit-btn {
-  padding: 10px;
+  padding: 10px 20px;
   margin: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.js-add-country:hover,
+.js-form-submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Стилізація картки */
+.card img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+/* Медіа-запит для респонсивного дизайну */
+@media screen and (max-width: 768px) {
+  .js-form {
+    padding: 10px;
+  }
+
+  .js-inputs-container {
+    margin-bottom: 10px;
+  }
+
+  .inputs {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .js-add-country,
+  .js-form-submit-btn {
+    padding: 8px 16px;
+    margin: 8px;
+  }
+}
+
+/* Стилізація списку ul */
+.js-answers-from-form {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* Стилізація карток */
+.card {
+  flex: 0 0 calc(25% - 20px); /* Розмір для 4 карточок в рядку з відступами */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    flex: 0 0 calc(50% - 20px); /* Розмір для 2 карточок в рядку з відступами на мобільних пристроях */
+  }
+}
+
+.card-info {
+  text-align: center;
+}
+
+.card-country {
+  font-size: 2.5vw; /* Гнучкий розмір шрифту */
+  margin-bottom: 0.5vw;
+}
+
+.card-city {
+  font-size: 2vw; /* Гнучкий розмір шрифту */
+  margin-bottom: 1.5vw;
+}
+
+.card-icon {
+  width: 10vw; /* Гнучкий розмір зображення */
+  height: 10vw;
+  margin-bottom: 1vw;
+}
+
+.card-text {
+  font-size: 3vw; /* Гнучкий розмір шрифту */
+  margin-bottom: 0.5vw;
+}
+
+.card-temp {
+  font-size: 3vw; /* Гнучкий розмір шрифту */
 }
