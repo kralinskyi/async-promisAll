@@ -1,5 +1,7 @@
-import axios from 'axios';
 import { Notify } from 'notiflix';
+import getCountries from './js/getCountriesAPI';
+import getWeather from './js/getWeatherAPI';
+import createMarkUp from './js/createMarkup';
 
 const form = document.querySelector('.js-form');
 const addCountryBtn = document.querySelector('.js-add-country');
@@ -11,16 +13,6 @@ const markup =
 
 addCountryBtn.addEventListener('click', handleAddCountryBtn);
 form.addEventListener('submit', handleFormSubmit);
-
-//  варіант додавання інпутів до форми
-function handleAddCountryBtn() {
-  countriesInputsContainer.insertAdjacentHTML('beforeend', markup);
-}
-
-// Ощищення контейнера імпутів до базового стану
-function clearInputsContainer() {
-  countriesInputsContainer.innerHTML = markup;
-}
 
 function handleFormSubmit(e) {
   e.preventDefault();
@@ -39,93 +31,32 @@ function handleFormSubmit(e) {
     return;
   }
 
+  //Виконуємо запити за масивом країн
   getCountries(countries)
     .then(async response => {
+      //відбираємо масив столиць для запиту погоди
       const capitals = response.map(({ capital }) => capital[0]);
-
+      //Забираємо погоду
       const weatherService = await getWeather(capitals);
-
+      //Очищаємо попередні звідмальовані запити
       list.innerHTML = '';
-
+      //Малюємо нову розмітку
       list.insertAdjacentHTML('beforeend', createMarkUp(weatherService));
     })
     .catch(e => console.log(e))
     .finally(() => {
+      //Прибираємо лишні inputs Form.reset() на випадок залишити кнопки
       clearInputsContainer();
-      form.reset();
+      // form.reset();
     });
 }
 
-async function getCountries(arr) {
-  const url = `https://restcountries.com/v3.1/name/`;
-
-  const promises = arr.map(async country => {
-    return await axios.get(`${url}${country}`);
-  });
-
-  const data = await Promise.allSettled(promises);
-
-  // Перший map - щоб не змінити оригінальний масив data, щоб була можливість відфільтрувати також rejected і відмалювати
-  const allFullfieldCountries = data
-    .map(el => el)
-    .filter(({ status }) => status === 'fulfilled')
-    .map(({ value }) => value.data[0]);
-
-  // Відмальовуєм можливі некоректні запити
-  data
-    .map(el => el)
-    .filter(({ status }) => status === 'rejected')
-    .map(({ reason }) =>
-      Notify.failure(
-        `Fetching ${reason.config.url} failed. Reason - ${reason.message}`
-      )
-    );
-
-  return allFullfieldCountries;
+//  варіант додавання інпутів до форми
+function handleAddCountryBtn() {
+  countriesInputsContainer.insertAdjacentHTML('beforeend', markup);
 }
 
-async function getWeather(arr) {
-  const url = 'http://api.weatherapi.com/v1/current.json?';
-  const API_KEY = '3e63f0b8839d44b6905122958231712';
-
-  const resps = arr.map(async city => {
-    const params = new URLSearchParams({
-      key: API_KEY,
-      q: city,
-      lang: 'uk',
-    });
-
-    return await axios.get(url, { params });
-  });
-
-  const dataSuccess = await Promise.allSettled(resps);
-  const allCitiesWeather = dataSuccess
-    .filter(({ status }) => status === 'fulfilled')
-    .map(({ value }) => value.data);
-
-  return allCitiesWeather;
-}
-
-function createMarkUp(arr) {
-  return arr
-    .map(
-      ({
-        current: {
-          condition: { icon, text },
-          temp_c,
-        },
-        location: { name, country },
-      }) => {
-        return ` <li class="card">
-            <div class="card-info">
-              <h2 class="card-country">${country}</h2>
-              <h3 class="card-city">${name}</h3>
-            </div>
-            <img class="card-icon" src="${icon}" alt="${text}">
-            <p class="card-text">${text}</p>
-            <p class="card-temp">${temp_c}&deg; C</p>
-          </li>`;
-      }
-    )
-    .join('');
+// Ощищення контейнера імпутів до базового стану
+function clearInputsContainer() {
+  countriesInputsContainer.innerHTML = markup;
 }
