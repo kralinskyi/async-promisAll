@@ -65,9 +65,21 @@ async function getCountries(arr) {
 
   const data = await Promise.allSettled(promises);
 
+  // Перший map - щоб не змінити оригінальний масив data, щоб була можливість відфільтрувати також rejected і відмалювати
   const allFullfieldCountries = data
+    .map(el => el)
     .filter(({ status }) => status === 'fulfilled')
     .map(({ value }) => value.data[0]);
+
+  // Відмальовуєм можливі некоректні запити
+  data
+    .map(el => el)
+    .filter(({ status }) => status === 'rejected')
+    .map(({ reason }) =>
+      Notify.failure(
+        `Fetching ${reason.config.url} failed. Reason - ${reason.message}`
+      )
+    );
 
   return allFullfieldCountries;
 }
@@ -86,8 +98,8 @@ async function getWeather(arr) {
     return await axios.get(url, { params });
   });
 
-  const data = await Promise.allSettled(resps);
-  const allCitiesWeather = data
+  const dataSuccess = await Promise.allSettled(resps);
+  const allCitiesWeather = dataSuccess
     .filter(({ status }) => status === 'fulfilled')
     .map(({ value }) => value.data);
 
@@ -111,7 +123,7 @@ function createMarkUp(arr) {
             </div>
             <img class="card-icon" src="${icon}" alt="${text}">
             <p class="card-text">${text}</p>
-            <p class="card-temp">${temp_c}</p>
+            <p class="card-temp">${temp_c}&deg; C</p>
           </li>`;
       }
     )

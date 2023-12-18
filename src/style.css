@@ -97,7 +97,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -117,26 +117,26 @@
 }
 
 .card-country {
-  font-size: 2.5vw; /* Гнучкий розмір шрифту */
-  margin-bottom: 0.5vw;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 .card-city {
-  font-size: 2vw; /* Гнучкий розмір шрифту */
-  margin-bottom: 1.5vw;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .card-icon {
-  width: 10vw; /* Гнучкий розмір зображення */
-  height: 10vw;
-  margin-bottom: 1vw;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
 }
 
 .card-text {
-  font-size: 3vw; /* Гнучкий розмір шрифту */
-  margin-bottom: 0.5vw;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .card-temp {
-  font-size: 3vw; /* Гнучкий розмір шрифту */
+  font-size: 3vw;
 }
